@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,12 @@
 |
 */
 
-const Route = use('Route')
+const Route = use('Route');
 
-Route.on('/').render('welcome')
+Route.on('/').render('welcome');
+
+Route.get('/auth/register', 'Auth/RegisterController.index')
+    .as('auth.register');
+
+Route.post('/auth/register', 'Auth/RegisterController.register')
+    .as('auth.register');
