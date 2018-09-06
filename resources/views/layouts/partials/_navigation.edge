@@ -2,36 +2,39 @@
   <div class="container">
     <div id="topNav" class="navbar-menu">
       <div class="navbar-start">
-        <a href="#" class="navbar-item">
+        <a href="{{ route('home') }}" class="navbar-item">
           Forum
         </a>
       </div>
 
       <div class="navbar-end">
+        @loggedIn
           <div class="navbar-item">
-            <form action="#" method="POST">
+            <form action="{{ route('auth.logout') }}" method="POST">
+              {{ csrfField() }}
               <button class="button is-white" type="submit" href="#">
                 Log out
               </button>
             </form>
           </div>
-
+        @else
           <div class="navbar-item">
             <div class="field is-grouped">
               <p class="control">
-                <a href="#" class="button">
+                <a href="{{ route('auth.register') }}" class="button">
                   <span>
                     Register
                   </span>
                 </a>
               </p>
               <p class="control">
-                <a href="#" class="button is-info is-outlined">
+                <a href="{{ route('auth.login') }}" class="button is-info is-outlined">
                   <span>Login</span>
                 </a>
               </p>
             </div>
           </div>
+        @endloggedIn
       </div>
     </div>
   </div>
