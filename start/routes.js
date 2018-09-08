@@ -17,14 +17,26 @@ const Route = use('Route');
 
 Route.on('/').render('welcome').as('home');
 
+Route.get('/posts/create', 'PostController.create')
+    .as('posts.create')
+    .middleware(['auth']);
+
+Route.post('/posts', 'PostController.store')
+    .as('posts.store')
+    .middleware(['auth']);
+
 Route.get('/auth/register', 'Auth/RegisterController.index')
-    .as('auth.register');
+    .as('auth.register')
+    .middleware(['guest']);
 
 Route.post('/auth/register', 'Auth/RegisterController.register')
-    .as('auth.register');
+    .as('auth.register')
+    .middleware(['guest']);
 
 Route.get('/auth/login', 'Auth/LoginController.index')
-    .as('auth.login');
+    .as('auth.login')
+    .middleware(['guest']);
 
 Route.post('/auth/login', 'Auth/LoginController.login')
-    .as('auth.login');
+    .as('auth.login')
+    .middleware(['guest']);

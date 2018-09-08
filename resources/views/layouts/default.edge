@@ -9,10 +9,11 @@
 </head>
 <body>
   @include('layouts/partials/_navigation')
+  @include('forum/partials/_navigation')
   <section class="container">
     <div class="columns">
       <div class="column is-3">
-        sidebar
+        @include('forum/partials/_sidebar')
       </div>
       <div class="column is-9">
         @!section('content')
