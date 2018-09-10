@@ -2,6 +2,7 @@
 
 const { validateAll } = use('Validator');
 const Post = use('App/Models/Post');
+const moment = require('moment');
 
 class PostController {
   async show ({ view, params }) {
@@ -46,7 +47,8 @@ class PostController {
       title,
       tag_id: tag,
       user_id: auth.user.id,
-      body
+      body,
+      last_reply_at: moment()
     });
 
     await post.save();

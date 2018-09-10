@@ -17,9 +17,6 @@ const Route = use('Route');
 
 Route.get('/', 'HomeController.index').as('home');
 
-Route.get('/posts/:slug', 'PostController.show')
-     .as('posts.show');
-
 Route.post('/posts/:slug/reply', 'PostReplyController.store')
      .as('posts.reply.store')
      .middleware(['auth']);
@@ -31,6 +28,16 @@ Route.get('/posts/create', 'PostController.create')
 Route.post('/posts', 'PostController.store')
     .as('posts.store')
     .middleware(['auth']);
+
+Route.get('/unanswered', 'UnansweredPostController.index')
+     .as('posts.unanswered');
+
+Route.get('/own', 'OwnPostController.index')
+     .as('posts.own')
+     .middleware(['auth']);
+
+Route.get('/posts/:slug', 'PostController.show')
+     .as('posts.show');
 
 Route.get('/auth/register', 'Auth/RegisterController.index')
     .as('auth.register')

@@ -2,10 +2,11 @@
 
 const Post = use('App/Models/Post');
 
-class HomeController {
-  async index ({ view }) {
+class OwnPostController {
+  async index ({ view, auth }) {
     const posts = await Post.query()
                             .forIndex()
+                            .where('user_id', '=', auth.user.id)
                             .fetch();
 
     return view.render('index', {
@@ -14,4 +15,4 @@ class HomeController {
   }
 }
 
-module.exports = HomeController;
+module.exports = OwnPostController;

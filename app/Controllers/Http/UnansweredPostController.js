@@ -2,10 +2,11 @@
 
 const Post = use('App/Models/Post');
 
-class HomeController {
+class UnansweredPostController {
   async index ({ view }) {
     const posts = await Post.query()
                             .forIndex()
+                            .doesntHave('replies')
                             .fetch();
 
     return view.render('index', {
@@ -14,4 +15,4 @@ class HomeController {
   }
 }
 
-module.exports = HomeController;
+module.exports = UnansweredPostController;

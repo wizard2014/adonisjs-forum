@@ -2,10 +2,11 @@
 
 const { validateAll } = use('Validator');
 const Post = use('App/Models/Post');
+const moment = require('moment');
 
 class PostReplyController {
   async store ({ request, response, session, auth, params }) {
-    const post = await Post.query()
+    let post = await Post.query()
       .where('slug', '=', params.slug)
       .firstOrFail();
 
@@ -32,7 +33,10 @@ class PostReplyController {
       user_id: auth.user.id
     });
 
+    post.last_reply_at = moment();
+
     await reply.save();
+    await post.save();
 
     return response.redirect('back');
   }
