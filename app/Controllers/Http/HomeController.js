@@ -3,10 +3,10 @@
 const Post = use('App/Models/Post');
 
 class HomeController {
-  async index ({ view }) {
+  async index ({ view, request }) {
     const posts = await Post.query()
                             .forIndex()
-                            .fetch();
+                            .paginate(request.input('page', 1), 2);
 
     return view.render('index', {
       posts

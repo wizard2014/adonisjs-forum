@@ -36,6 +36,9 @@ Route.get('/own', 'OwnPostController.index')
      .as('posts.own')
      .middleware(['auth']);
 
+Route.get('/tag/:slug', 'TagPostController.index')
+     .as('posts.tags');
+
 Route.get('/posts/:slug', 'PostController.show')
      .as('posts.show');
 

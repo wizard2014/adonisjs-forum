@@ -13,6 +13,16 @@ hooks.after.providersBooted(() => {
     return pluralize(singular, length);
   });
 
+  View.global('parseInt', (number) => {
+    return parseInt(number);
+  });
+
+  View.global('paginationArray', (total) => {
+    return Array.from(new Array(total), (value, index) => {
+      return index + 1;
+    })
+  });
+
   const Validator = use('Validator');
   const Database = use('Database');
 
