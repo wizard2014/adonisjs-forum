@@ -46,6 +46,10 @@
                 </article>
               </div>
             </div>
+
+            <form action="{{ route('posts.answer.destroy', { slug: post.slug }) }}?_method=DELETE" method="POST" id="destroy">
+              {{ csrfField() }}
+            </form>
           @endif
 
           @each(reply in post.replies)
@@ -60,6 +64,9 @@
                   <strong>{{ reply.user.username }}</strong>
                   <p>{{ reply.body }}</p>
                   <small>
+                    @if(auth.user && auth.user.id == post.user_id)
+                      <a href="#" onclick="event.preventDefault(); document.getElementById('answer-{{ reply.id }}').submit();">Mark as best answer</a>
+                    @endif
                     {{ reply.created_at }}
                   </small>
                 </div>
