@@ -19,12 +19,20 @@ class LoginController {
 
     if (validation.fails()) {
       session.withErrors(validation.messages())
-            .flashAll();
+        .flashAll();
 
       return response.redirect('back');
     }
 
     await auth.attempt(email, password);
+
+    if (session.get('_intended', false)) {
+      let redirect = response.redirect(session.get('_intended'));
+
+      session.forget('_intended');
+
+      return redirect;
+    }
 
     return response.route('home');
   }
